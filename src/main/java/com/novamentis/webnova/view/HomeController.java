@@ -1,4 +1,4 @@
-package com.novamentis.webnova.controllers;
+package com.novamentis.webnova.view;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
