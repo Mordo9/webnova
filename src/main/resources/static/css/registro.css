@@ -4,9 +4,19 @@
     padding: 30px;
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    width: 800px;
-    max-width: 95%;
+    width: 800px; 
+    max-width: 95%; 
+
+    margin-left: auto;
+    margin-right: auto;
+
 }
+.section-formulario-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 form label {
     display: inline-block;
     width: 150px;
@@ -14,13 +24,16 @@ form label {
     margin-top: 10px;
     color: #333;
 }
-form input, form select {
+
+form input, 
+form select {
     width: 250px;
     padding: 6px;
     margin-bottom: 12px;
     border: 1px solid #ccc;
     border-radius: 5px;
 }
+
 form input[type="file"] {
     padding: 2px;
 }
