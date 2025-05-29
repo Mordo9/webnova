@@ -1,4 +1,4 @@
-package com.novamentis.webnova.model;
+package com.novamentis.webnova.model.mongo;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;

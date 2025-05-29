@@ -1,7 +1,7 @@
 package com.novamentis.webnova.controllers;
 
+import com.novamentis.webnova.model.mongo.Alumno;
 import com.novamentis.webnova.repository.AlumnoRepository;
-import com.novamentis.webnova.model.Alumno;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
