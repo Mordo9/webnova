@@ -14,7 +14,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
-import java.util.UUID; // <-- Asegúrate de importar esto
+import java.util.UUID;
 
 @Controller
 public class AlumnoController {
