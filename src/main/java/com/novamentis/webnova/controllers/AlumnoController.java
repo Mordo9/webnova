@@ -2,6 +2,7 @@ package com.novamentis.webnova.controllers;
 
 import com.novamentis.webnova.model.mongo.Alumno;
 import com.novamentis.webnova.repository.AlumnoRepository;
+import com.novamentis.webnova.util.OcrService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -43,20 +44,40 @@ public class AlumnoController {
             @RequestParam String estadoCivil,
             RedirectAttributes redirectAttributes) throws IOException {
 
-        // Ruta de la carpeta donde guardar el archivo
         String uploadDir = "C:/uploads/";
         File uploadPath = new File(uploadDir);
 
-        // Crea el directorio si no existe
         if (!uploadPath.exists()) {
             uploadPath.mkdirs();
         }
 
-        // Guardar archivo si es necesario
         String nombreArchivo = documento.getOriginalFilename();
-        if (!documento.isEmpty() && "application/pdf".equals(documento.getContentType())) {
+
+        if (!documento.isEmpty()) {
             File destino = new File(uploadPath, nombreArchivo);
             documento.transferTo(destino);
+
+            // OCR para PDF e imágenes
+            String textoExtraido = OcrService.extraerTexto(destino);
+            System.out.println("TEXTO EXTRAÍDO DEL DOCUMENTO:\n" + textoExtraido);
+
+            // === Comparación de nombres ===
+            String nombreCompletoAlumno = (nombre + " " + apellido).toLowerCase().trim();
+            String nombreCompletoApoderado = (apoderadoNombre + " " + apoderadoApellido).toLowerCase().trim();
+
+            String textoNormalizado = textoExtraido
+                    .replaceAll("[\\n\\r]", " ")
+                    .replaceAll("\\s+", " ")
+                    .toLowerCase();
+
+            boolean alumnoPresente = textoNormalizado.contains(nombreCompletoAlumno);
+            boolean apoderadoPresente = textoNormalizado.contains(nombreCompletoApoderado);
+
+            if (!alumnoPresente || !apoderadoPresente) {
+                redirectAttributes.addFlashAttribute("error",
+                        "Error: El nombre del alumno o del apoderado no se encuentra en el documento enviado.");
+                return "redirect:/registro";
+            }
         }
 
         // Crear y guardar alumno
@@ -79,7 +100,7 @@ public class AlumnoController {
         alumno.setApoderadoTelefono(apoderadoTelefono);
         alumno.setEstadoCivil(estadoCivil);
 
-        // Asignar ID de usuario aleatorio temporal
+        // ID aleatorio
         String usuarioId = UUID.randomUUID().toString();
         alumno.setUsuarioId(usuarioId);
 

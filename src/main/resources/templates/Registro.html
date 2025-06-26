@@ -99,17 +99,14 @@
         <p>Matriculate ahora.</p>
       </div>
     </section>
-
-    <div th:if="${mensaje}" class="alert alert-success" role="alert">
-      <span th:text="${mensaje}"></span>
-    </div>
-
-    <div th:if="${error}" class="alert alert-danger" role="alert">
-      <span th:text="${error}"></span>
-    </div>
-
     <section id="formulario" class="py-5 bg-light">
       <div class="container">
+        <div th:if="${mensaje}" class="alert alert-success" role="alert">
+          <span th:text="${mensaje}"></span>
+        </div>
+        <div th:if="${error}" class="alert alert-danger" role="alert">
+          <span th:text="${error}"></span>
+        </div>
         <h2 class="text-center mb-4">Formulario de Matrícula</h2>
 
         <form
@@ -335,10 +332,7 @@
           <div class="row gy-4">
             <div class="col-lg-4 col-md-12 footer-info">
               <a href="#" class="footer-logo d-flex align-items-center">
-                <img
-                  src="/images/logo.png"
-                  alt="ScaffoldCo Footer Logo"
-                />
+                <img src="/images/logo.png" alt="ScaffoldCo Footer Logo" />
               </a>
               <p>
                 InovaMentis - Educación de calidad para un futuro brillante.
@@ -361,7 +355,8 @@
               <h4>Enlaces</h4>
               <ul>
                 <li>
-                  <i class="fas fa-chevron-right"></i> <a href="#hero">Inicio</a>
+                  <i class="fas fa-chevron-right"></i>
+                  <a href="#hero">Inicio</a>
                 </li>
                 <li>
                   <i class="fas fa-chevron-right"></i>
